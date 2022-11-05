@@ -1,17 +1,19 @@
 import "./App.css";
 import styled from "styled-components";
-import { Item } from "../components/Items/Item.js";
+import { Item } from "../components/items/Item.js";
 import { Currency } from "../features/currency/Currency";
+import { Footer } from "../components/footer/Footer";
 
 function App(props) {
   return (
-    <AppWrapper className="max-w-4xl ml-auto mr-auto px-5 pt-10">
+    <AppWrapper className="ml-auto mr-auto max-w-4xl border px-5 py-5">
       <Currency />
       <AppMaxWidth className="flex flex-row flex-wrap gap-5">
         <Item />
         <Item />
         <Item />
       </AppMaxWidth>
+      <Footer />
     </AppWrapper>
   );
 }
