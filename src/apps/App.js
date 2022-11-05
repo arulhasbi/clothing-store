@@ -1,6 +1,6 @@
 import "./App.css";
 import styled from "styled-components";
-import { Item } from "../components/items/Item.js";
+import { Item } from "../components/Items/item";
 import { Currency } from "../features/currency/Currency";
 import { Footer } from "../components/footer/Footer";
 
