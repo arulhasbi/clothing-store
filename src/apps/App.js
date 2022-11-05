@@ -1,17 +1,20 @@
 import "./App.css";
 import styled from "styled-components";
-import { Item } from "../components/Items/item";
 import { Currency } from "../features/currency/Currency";
 import { Footer } from "../components/footer/Footer";
+import { Inventory } from "../features/inventory/Inventory";
+
+if (process.env.NODE_ENV === "development") {
+  const { worker } = require("../mocks/browser");
+  worker.start();
+}
 
 function App(props) {
   return (
-    <AppWrapper className="ml-auto mr-auto max-w-4xl border px-5 py-5">
+    <AppWrapper className="ml-auto mr-auto max-w-4xl px-5 py-5">
       <Currency />
-      <AppMaxWidth className="flex flex-row flex-wrap gap-5">
-        <Item />
-        <Item />
-        <Item />
+      <AppMaxWidth>
+        <Inventory state={props.state} dispatch={props.dispatch}></Inventory>
       </AppMaxWidth>
       <Footer />
     </AppWrapper>

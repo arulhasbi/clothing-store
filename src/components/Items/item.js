@@ -7,12 +7,12 @@ export const Item = (props) => {
       <ItemMaxWidth>
         <div>
           <figure className="block w-full border">
-            <img src={process.env.PUBLIC_URL + "/assets/flyknit.jpg"} alt="" />
+            <img src={process.env.PUBLIC_URL + props.url} alt="" />
           </figure>
-          <p className="mt-2 font-sans text-base antialiased">
-            The quick brown fox
+          <p className="mt-2 font-sans text-base antialiased">{props.name}</p>
+          <p className="text-md font-sans font-bold antialiased">
+            ${Math.floor(props.price)} USD
           </p>
-          <p className="text-md font-sans font-bold antialiased">$17.99 USD</p>
           <button
             type="button"
             className="mt-5 w-[110px] rounded-md border-2 border-slate-900 bg-stone-100 py-1 text-sm antialiased shadow-sm"
