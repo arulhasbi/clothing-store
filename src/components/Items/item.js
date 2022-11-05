@@ -3,19 +3,19 @@ import styled from "styled-components";
 
 export const Item = (props) => {
   return (
-    <ItemWrapper className="basis-1/4 min-w-[250px] grow">
+    <ItemWrapper className="min-w-[250px] grow basis-1/4">
       <ItemMaxWidth>
         <div>
-          <figure className="border block w-full">
+          <figure className="block w-full border">
             <img src={process.env.PUBLIC_URL + "/assets/flyknit.jpg"} alt="" />
           </figure>
-          <p className="font-sans text-base antialiased mt-2">
+          <p className="mt-2 font-sans text-base antialiased">
             The quick brown fox
           </p>
-          <p className="font-sans text-md font-bold antialiased">$17.99 USD</p>
+          <p className="text-md font-sans font-bold antialiased">$17.99 USD</p>
           <button
             type="button"
-            className="antialiased font-bold text-sm py-1 mt-5 border-2 border-slate-900 w-[110px] rounded-md shadow-sm bg-stone-100"
+            className="mt-5 w-[110px] rounded-md border-2 border-slate-900 bg-stone-100 py-1 text-sm antialiased shadow-sm"
           >
             Add to cart
           </button>
