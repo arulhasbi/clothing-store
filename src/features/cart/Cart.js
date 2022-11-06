@@ -6,7 +6,7 @@ export const Cart = (props) => {
     <CartWrapper>
       <CartMaxWidth>
         <div className="flex justify-between">
-          <p className="text-base antialiased">Fly Knit Shoes</p>
+          <p className="text-base antialiased">{props.name}</p>
           <select
             name="quantity"
             id="quantity"

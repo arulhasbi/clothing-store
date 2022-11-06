@@ -17,7 +17,9 @@ export const Inventory = (props) => {
         {state.inventory.length !== 0 &&
           state.inventory.map((item) => (
             <Item
+              fullItem={item}
               state={state}
+              dispatch={props.dispatch}
               key={item.id}
               name={item.name}
               price={item.price}

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { getConvert } from "../../api/inventory";
+import { addToCart } from "../../features/cart/cartSlice";
 
 const baseSymbol = {
   USD: "$",
@@ -9,7 +10,7 @@ const baseSymbol = {
 };
 
 export const Item = (props) => {
-  const { state } = props;
+  const { state, dispatch } = props;
   const [priceTag, setPriceTag] = useState();
 
   const settingPriceTag = async (base) => {
@@ -27,6 +28,10 @@ export const Item = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.currency.filter]);
 
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
+  };
+
   return (
     <ItemWrapper className="min-w-[250px] grow basis-1/4">
       <ItemMaxWidth>
@@ -42,6 +47,7 @@ export const Item = (props) => {
           <button
             type="button"
             className="mt-5 w-[110px] rounded-md border-2 border-slate-900 bg-stone-100 py-1 text-sm antialiased shadow-sm"
+            onClick={() => handleAddToCart(props.fullItem)}
           >
             Add to cart
           </button>
