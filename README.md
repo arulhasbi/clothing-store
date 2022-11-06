@@ -26,7 +26,7 @@ To sum up, I am really happy and I hope that I will learn more about react and t
 
 ### Project Screen Shots
 
-![Screenshot](assets/ss.png)
+![Screenshot](ss.png)
 
 ### Dependencies
 
