@@ -16,7 +16,7 @@ function App(props) {
       <AppMaxWidth>
         <Inventory state={props.state} dispatch={props.dispatch}></Inventory>
       </AppMaxWidth>
-      <Footer />
+      <Footer state={props.state} dispatch={props.dispatch} />
     </AppWrapper>
   );
 }
