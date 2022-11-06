@@ -6,14 +6,10 @@ import { loadItemsAsync } from "./inventorySlice";
 export const Inventory = (props) => {
   const { state, dispatch } = props;
 
-  // load inventory
   useEffect(() => {
     dispatch(loadItemsAsync());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
 
   return (
     <InventoryWrapper>
@@ -21,6 +17,7 @@ export const Inventory = (props) => {
         {state.inventory.length !== 0 &&
           state.inventory.map((item) => (
             <Item
+              state={state}
               key={item.id}
               name={item.name}
               price={item.price}

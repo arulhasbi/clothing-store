@@ -1,23 +1,42 @@
-function increment() {
+import { getCurrency } from "../../api/inventory";
+
+const loadCurrency = (currency) => {
   return {
-    type: "INCREMENT_COUNTER",
+    type: "currency/loadCurrency",
+    payload: currency,
   };
-}
+};
 
-export function incrementAsync() {
-  return (dispatch) => {
-    setTimeout(() => {
-      // You can invoke sync or async actions with `dispatch`
-      dispatch(increment());
-    }, 100);
+export const filter = (base) => {
+  return {
+    type: "currency/filter",
+    payload: base,
   };
-}
+};
 
-const initialState = 0;
-export const currencyReducerSlice = (currency = initialState, action) => {
+export const loadCurrencyAsync = () => {
+  return async (dispatch) => {
+    const response = await getCurrency();
+    dispatch(loadCurrency(response));
+  };
+};
+
+const initialState = {
+  bases: [],
+  filter: "USD",
+};
+export const currencySliceReducer = (currency = initialState, action) => {
   switch (action.type) {
-    case "INCREMENT_COUNTER":
-      return currency + 1;
+    case "currency/loadCurrency":
+      return {
+        ...currency,
+        bases: [...action.payload],
+      };
+    case "currency/filter":
+      return {
+        ...currency,
+        filter: action.payload,
+      };
     default:
       return currency;
   }

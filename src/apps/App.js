@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === "development") {
 function App(props) {
   return (
     <AppWrapper className="ml-auto mr-auto max-w-4xl px-5 py-5">
-      <Currency />
+      <Currency state={props.state} dispatch={props.dispatch} />
       <AppMaxWidth>
         <Inventory state={props.state} dispatch={props.dispatch}></Inventory>
       </AppMaxWidth>

@@ -1,30 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { loadCurrencyAsync, filter } from "./currencySlice";
 
 export const Currency = (props) => {
-  const [currencies, setCurrencies] = useState(["USD", "EUR", "CAD"]);
-  const [currency, setCurrency] = useState("");
+  const { state, dispatch } = props;
+  const [selected, setSelected] = useState("USD");
   const handleClick = (param) => {
-    setCurrency(param);
+    setSelected(param);
   };
+
+  useEffect(() => {
+    dispatch(filter(selected));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected]);
+
+  useEffect(() => {
+    dispatch(loadCurrencyAsync());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <CurrencyWrapper className="mb-5">
       <CurrencyMaxWidth>
-        <h6 className="mb-2 font-bold text-base">Choose a currency</h6>
-        <div className="w-fit flex gap-2">
-          {currencies.length !== 0 &&
-            currencies.map((cur, index) => (
+        <h6 className="mb-2 text-base font-bold">Choose a currency</h6>
+        <div className="flex w-fit gap-2">
+          {state.currency.bases.length !== 0 &&
+            state.currency.bases.map((cur) => (
               <button
-                key={index}
+                key={cur.id}
                 type="button"
-                className={`antialiased text-sm py-1 border-2
-                border-slate-900 w-[50px] rounded-md shadow-sm ${
-                  currency === cur ? "bg-zinc-900 text-white font-bold" : null
-                }`}
-                onClick={() => handleClick(cur)}
+                className={`w-[50px] rounded-md border-2 border-slate-900
+              py-1 text-sm antialiased shadow-sm ${
+                cur.abbrev === selected
+                  ? "bg-zinc-900 font-bold text-white"
+                  : null
+              }`}
+                onClick={() => handleClick(cur.abbrev)}
               >
-                {cur}
+                {cur.abbrev}
               </button>
             ))}
         </div>

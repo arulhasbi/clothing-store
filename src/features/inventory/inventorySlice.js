@@ -19,8 +19,6 @@ export const inventorySliceReducer = (inventory = initialState, action) => {
   switch (action.type) {
     case "inventory/loadItems":
       return [...action.payload];
-    case "inventory/allItems":
-      return inventory;
     default:
       return inventory;
   }

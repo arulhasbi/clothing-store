@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { getConvert } from "../../api/inventory";
+
+const baseSymbol = {
+  USD: "$",
+  EUR: "€",
+  CAD: "$",
+};
 
 export const Item = (props) => {
+  const { state } = props;
+  const [priceTag, setPriceTag] = useState();
+
+  const settingPriceTag = async (base) => {
+    try {
+      const response = await getConvert(props.price, base);
+      setPriceTag(response.result);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const base = state.currency.filter;
+    settingPriceTag(base);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.currency.filter]);
+
   return (
     <ItemWrapper className="min-w-[250px] grow basis-1/4">
       <ItemMaxWidth>
@@ -11,7 +36,8 @@ export const Item = (props) => {
           </figure>
           <p className="mt-2 font-sans text-base antialiased">{props.name}</p>
           <p className="text-md font-sans font-bold antialiased">
-            ${Math.floor(props.price)} USD
+            {baseSymbol[props.state.currency.filter]}
+            {priceTag ? Math.floor(priceTag) : "-"} {state.currency.filter}
           </p>
           <button
             type="button"
